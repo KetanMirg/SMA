@@ -1,23 +1,29 @@
 package com.ketan.messenger.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ketan.messenger.beans.Message;
 import com.ketan.messenger.database.Database;
 
 public class MessageService {
-	List<Message> messageList = null;
+	 HashMap<Integer,Message> messageMap  = null;
 	public MessageService() {
 		// TODO Auto-generated constructor stub
-		messageList = Database.getMessageList();
+		messageMap = (HashMap<Integer, Message>) Database.getMessageList();
 		
 	}
 	
-	public List<Message> getAllMessages(){
-		return messageList;
+	public Map getAllMessages(){
+		return messageMap;
 	}
 	
 	public void addMessage(Message msg){
-		messageList.add(msg);
+		messageMap.put(msg.getId(),msg);
+	}
+	
+	public Message getMessage(int id){
+		return messageMap.get(id);
 	}
 }

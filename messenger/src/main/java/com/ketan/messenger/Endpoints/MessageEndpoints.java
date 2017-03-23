@@ -1,7 +1,12 @@
 package com.ketan.messenger.Endpoints;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -24,14 +29,25 @@ public class MessageEndpoints {
 	MessageService ms = new MessageService();
 	@GET
 	public List<Message> getAllMessages(){
-		return ms.getAllMessages();
+		List<Message> msgList = new ArrayList<>();
+		Set<Map.Entry<Integer, Message>> set =  ms.getAllMessages().entrySet();
+		for(Map.Entry<Integer, Message> e : set){
+			msgList.add(e.getValue());
+		}
+		return  msgList;
 	}
 	
-	/*@POST
-	@Path("/{message}")
-	public Message addMessage(@PathParam("message") Message msg){
+	@GET
+	@Path("/{messageId}")
+	public Message getMessage(@PathParam("messageId") int id){
+		Message msg = ms.getMessage(id);
+		return msg;
+	}
+	
+	@POST
+	public Message addMessage(Message msg){
 		ms.addMessage(msg);
 		return msg;
-	}*/
+	}
 
 }
