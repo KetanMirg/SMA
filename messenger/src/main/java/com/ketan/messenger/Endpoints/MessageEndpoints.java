@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.ketan.messenger.beans.Message;
 import com.ketan.messenger.service.MessageService;
+import com.ketan.messenger.util.JsonConverter;
 
 
 
@@ -43,6 +44,20 @@ public class MessageEndpoints {
 		Message msg = ms.getMessage(id);
 		return msg;
 	}
+	
+	//Returning map as string\json example
+	@GET
+	@Path("/allmessages")
+	public String getMessages(){
+		List<Message> msgList = new ArrayList<>();
+		Set<Map.Entry<Integer, Message>> set =  ms.getAllMessages().entrySet();
+		for(Map.Entry<Integer, Message> e : set){
+			msgList.add(e.getValue());
+		}
+		JsonConverter.getJSONFromMap(ms.getAllMessages());
+		return  JsonConverter.getJSONFromMap(ms.getAllMessages());
+	}
+	
 	
 	@POST
 	public Message addMessage(Message msg){
