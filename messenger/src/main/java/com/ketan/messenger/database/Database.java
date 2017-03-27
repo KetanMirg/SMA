@@ -17,8 +17,10 @@ public class Database {
 		Message m = new Message();
 		m.setId(1);
 		m.setMessage("This is the first message!");
+
 		messageMap.put(m.getId(),m);
 		return messageMap;
+
 	}
 
 }

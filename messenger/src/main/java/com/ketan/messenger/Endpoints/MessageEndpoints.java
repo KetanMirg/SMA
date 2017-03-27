@@ -38,6 +38,7 @@ public class MessageEndpoints {
 		return  msgList;
 	}
 	
+
 	@GET
 	@Path("/{messageId}")
 	public Message getMessage(@PathParam("messageId") int id){
@@ -59,8 +60,10 @@ public class MessageEndpoints {
 	}
 	
 	
+
 	@POST
-	public Message addMessage(Message msg){
+	public Message addMessage( Message msg){
+
 		ms.addMessage(msg);
 		return msg;
 	}
